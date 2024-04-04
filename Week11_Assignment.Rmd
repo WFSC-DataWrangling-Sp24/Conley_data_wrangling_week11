@@ -278,3 +278,37 @@ d.  Take a look at the `pie_crab` dataset from the `lterdatasampler` package by 
 e.  Now use the `case_when` function inside a `mutate` function to create a new column called `size_category3` in the `pie_crab` dataframe that meets the same conditions as (b) and (c).
 
     I've placed my new column next to the size column for the sake of the answer key; you don't need to do this.
+
+    ```{r}
+    library(tidyverse)
+    library(lterdatasampler)
+    crab_size <- 17
+
+    #5a
+    if_else(crab_size >= 20, "large", "small")
+
+    #5b
+    if_else(crab_size >= 20, "large", 
+            if_else(crab_size >= 10 & crab_size < 20, "medium", "small"))
+
+    #5c
+    case_when(crab_size >= 20 ~ "large",
+              crab_size >= 10 & crab_size < 20 ~ "medium",
+              crab_size < 10 ~ "small")
+
+    #5d
+    head(pie_crab)
+
+    pie_crab %>% 
+      mutate(size_category = if_else(size >= 20, "large", "small"))
+
+    #5e
+    pie_crab %>% 
+      mutate(size_category3 = case_when(size >= 20 ~ "large",
+                                        size >= 10 & crab_size < 20 ~ "medium",
+                                        size < 10 ~ "small"))
+
+
+
+
+    ```
